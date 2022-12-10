@@ -2,12 +2,12 @@ import json
 from types import SimpleNamespace
 
 class Creature:
-    def __init__(self, name):
+    def __init__(self, name=None, json=None):
         self.name = name
 
 
 class Person(Creature):
-    def __init__(self, name, surname, age):
+    def __init__(self, name=None, surname=None, age=None, json=None):
         super().__init__(name)
         self.surname = surname
         self.age = age
@@ -15,7 +15,7 @@ class Person(Creature):
         print("Name: {}, Surname: {}, Age: {},".format(self.name, self.surname, self.age), end=' ')
 
 class Student(Person):
-    def __init__(self, name, surname, age, faculty, direction):
+    def __init__(self, name, surname=None, age=None, faculty=None, direction=None, json=None):
         super().__init__(name, surname, age)
         self.faculty = faculty
         self.direction = direction
@@ -32,9 +32,9 @@ B.info()
 jsonString = json.dumps(vars(B))
 print(jsonString)
 
-
-
 # Deserialize JSON Object
 abc = json.loads(jsonString, object_hook=lambda a:SimpleNamespace(**a))
-print()      
+print("Мы десереализовали эту падлюку ", abc.surname)    
+
+
 
